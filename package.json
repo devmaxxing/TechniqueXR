@@ -3,16 +3,22 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "start-dev": "nodemon ./bin/www"
   },
   "dependencies": {
-    "aframe": "^0.8.2",
+    "aframe-extras": "^4.1.2",
+    "aframe-physics-system": "^3.1.2",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.15.5",
     "morgan": "~1.9.0",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "super-hands": "^2.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
   }
 }

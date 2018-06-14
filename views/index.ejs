@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="/javascripts/animation-player.js"></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div class="main">
+      <div class="sidebar">
+
+      </div>
+      <div class="content">
+        <a-scene>
+          <a-assets>
+            <a-asset-item id="character" src="/models/moonwalk.gltf"></a-asset-item>
+          </a-assets>
+          <a-entity position="0 0 -2" rotation="0 90 0" gltf-model="#character" animation-player></a-entity>
+        </a-scene>
+      </div>
+    </div>
   </body>
 </html>
