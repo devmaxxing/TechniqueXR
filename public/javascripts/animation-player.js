@@ -11,7 +11,9 @@ AFRAME.registerComponent("animation-player", {
     crossFadeDuration: { default: 0 },
     loop: { default: "repeat", oneOf: Object.keys(LoopMode) },
     repetitions: { default: Infinity, min: 0 },
-    speed: { default: 1.0 }
+    speed: { default: 1.0 },
+    paused: {default: false},
+    currentTime: { default: -1}
   },
 
   init: function() {
@@ -26,9 +28,11 @@ AFRAME.registerComponent("animation-player", {
 
     if (model) {
       this.load(model);
+      this.playAction();
     } else {
       this.el.addEventListener("model-loaded", e => {
         this.load(e.detail.model);
+        this.playAction();
       });
     }
   },
@@ -56,10 +60,10 @@ AFRAME.registerComponent("animation-player", {
   update: function(previousData) {
     if (!previousData) return;
 
-    this.stopAction();
-
     if (this.data.clip) {
-      this.playAction();
+      if (previousData.currentTime !== this.data.currentTime) {
+        this.setTime(this.data.currentTime);
+      }
     }
   },
 
@@ -98,8 +102,21 @@ AFRAME.registerComponent("animation-player", {
     }
   },
 
+  pauseAction: function() {
+    if (!this.mixer) return;
+    this.data.paused = true;
+  },
+
+  setTime: function(time) {
+    if (!this.mixer) return;
+    console.log("setting time...");
+    let previousTime = this.mixer.time;
+    console.log(previousTime);
+    this.mixer.update(time - previousTime);
+  },
+
   tick: function(t, dt) {
-    if (this.mixer && !isNaN(dt)) this.mixer.update(this.data.speed * dt / 1000);
+    if (this.mixer && !isNaN(dt) && !this.data.paused) this.mixer.update(this.data.speed * dt / 1000);
   }
 });
 
