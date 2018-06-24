@@ -3,6 +3,7 @@
   <head>
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
     <script src="/javascripts/animation-player.js"></script>
+    <script src="/javascripts/index.js"></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
@@ -10,13 +11,34 @@
       <div class="sidebar">
 
       </div>
-      <div class="content">
-        <a-scene>
+      <div id="content">
+        <a-scene embedded>
           <a-assets>
             <a-asset-item id="character" src="/models/moonwalk.gltf"></a-asset-item>
           </a-assets>
-          <a-entity id="character-model" position="0 0 -2" rotation="0 90 0" gltf-model="#character" animation-player="speed:0.1"></a-entity>
+          <a-entity id="character-model" position="0.5 0 -2" rotation="0 90 0" gltf-model="#character" animation-player></a-entity>
         </a-scene>
+        <div id="player-controls">
+          <div class="controls-row">
+            <img id="previous-button" class="player-button" src="/images/skip_previous_icon.svg">
+            <img id="pause-play-button" class="player-button" src="/images/pause_icon.svg">
+            <img id="next-button" class="player-button" src="/images/skip_next_icon.svg">
+          </div>
+          <div class="controls-row">
+            <label id="speed-label" for="speed-select">Speed: </label>
+            <select id="speed-select">
+              <option value=0.25>0.25</option>
+              <option value=0.5>0.5</option>
+              <option value=0.75>0.75</option>
+              <option value=1 selected>Normal</option>
+              <option value=1.25>1.25</option>
+              <option value=1.5>1.5</option>
+              <option value=1.75>1.75</option>
+              <option value=2>2</option>
+            </select>
+            <input type="range" id="animation-slider" step="0.01" min="0" value=0>
+          </div>
+        </div>
       </div>
     </div>
   </body>

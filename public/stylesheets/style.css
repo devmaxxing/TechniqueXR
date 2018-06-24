@@ -1,8 +1,41 @@
 body {
-  padding: 50px;
+  margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+a-scene {
+  flex: 1 1 auto;
+}
+
+#content {
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+}
+
+#player-controls {
+  padding: 15px;
+}
+
+.controls-row {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+#animation-slider {
+  flex: 1;
+}
+
+.player-button {
+  background: transparent;
+  margin: 0 5px 0 5px;
+}
+
+#speed-label {
+  line-height: 25px;
 }

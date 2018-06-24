@@ -42,7 +42,7 @@ AFRAME.registerComponent("animation-player", {
     this.model = model;
     this.mixer = new THREE.AnimationMixer(model);
     this.mixer.addEventListener("loop", e => {
-      el.emit("animation-loop", { action: e.action, loopDelta: e.loopDelta });
+      el.emit("animation-loop", { action: e.action, loopDelta: e.loopDelta, time: this.mixer.time});
     });
     this.mixer.addEventListener("finished", e => {
       el.emit("animation-finished", {
@@ -98,6 +98,7 @@ AFRAME.registerComponent("animation-player", {
           .fadeIn(data.crossFadeDuration)
           .play();
         this.activeActions.push(action);
+        this.el.emit("clip-loaded", {clipDuration: clip.duration});
       }
     }
   },
@@ -109,14 +110,16 @@ AFRAME.registerComponent("animation-player", {
 
   setTime: function(time) {
     if (!this.mixer) return;
-    console.log("setting time...");
     let previousTime = this.mixer.time;
-    console.log(previousTime);
     this.mixer.update(time - previousTime);
   },
 
   tick: function(t, dt) {
-    if (this.mixer && !isNaN(dt) && !this.data.paused) this.mixer.update(this.data.speed * dt / 1000);
+    if (this.mixer && !isNaN(dt) && !this.data.paused) {
+      let tickAmount = this.data.speed * dt / 1000;
+      this.mixer.update(tickAmount);
+      this.el.emit("tick", {time: this.activeActions[0].time});
+    }
   }
 });
 
