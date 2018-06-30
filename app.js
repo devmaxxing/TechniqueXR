@@ -26,7 +26,7 @@ app.use('/javascripts', express.static(__dirname + '/node_modules/aframe-physics
 app.use('/javascripts', express.static(__dirname + '/node_modules/super-hands/dist/'));
 
 app.use('/', index);
-//app.use('/practice-room', practiceRoom);
+app.use('/practice-room', practiceRoom);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
