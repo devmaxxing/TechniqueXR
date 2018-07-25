@@ -15,6 +15,7 @@
     "ejs": "~2.5.7",
     "express": "~4.15.5",
     "morgan": "~1.9.0",
+    "networked-aframe": "^0.6.1",
     "serve-favicon": "~2.4.5",
     "super-hands": "^2.1.0"
   },
