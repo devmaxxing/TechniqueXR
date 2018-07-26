@@ -1,30 +1,23 @@
-#!/usr/bin/env node
-
-/**
- * Module dependencies.
- */
-
-var app = require('../app');
-var debug = require('debug')('techniquexr:server');
-var http = require('http');
+// Load required modules
+var http    = require("http");              // http server core module
+var express = require("express");           // web framework external module
 var socketIo = require("socket.io");        // web socket external module
 var easyrtc = require("easyrtc");               // EasyRTC external module
 
-/**
- * Get port from environment and store in Express.
- */
+// Set process name
+process.title = "node-easyrtc";
 
-var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+// Get port or default to 8080
+var port = process.env.PORT || 8080;
 
-/**
- * Create HTTP server.
- */
+// Setup and configure Express http server.
+var app = require('../app');
 
-var server = http.createServer(app);
+// Start Express http server
+var webServer = http.createServer(app);
 
-
-var socketServer = socketIo.listen(server, {"log level":1});
+// Start Socket.io so it attaches itself to Express server
+var socketServer = socketIo.listen(webServer, {"log level":1});
 
 var myIceServers = [
   {"url":"stun:stun.l.google.com:19302"},
@@ -61,7 +54,6 @@ if (process.env.STUN_SERVER) {
 }
 
 console.log("Ice Servers: " + JSON.stringify(myIceServers));
-
 easyrtc.setOption("appIceServers", myIceServers);
 easyrtc.setOption("logLevel", "debug");
 easyrtc.setOption("demosEnable", false);
@@ -91,9 +83,7 @@ easyrtc.events.on("roomJoin", function(connectionObj, roomName, roomParameter, c
 // Start EasyRTC server
 var rtc = easyrtc.listen(app, socketServer, null, function(err, rtcRef) {
     console.log("Initiated");
-    rtcRef.createApp("techniquexr", function(err, appObj){
-        console.log("App Created!");
-    });
+
     rtcRef.events.on("roomCreate", function(appObj, creatorConnectionObj, roomName, roomOptions, callback) {
         console.log("roomCreate fired! Trying to create: " + roomName);
 
@@ -101,70 +91,7 @@ var rtc = easyrtc.listen(app, socketServer, null, function(err, rtcRef) {
     });
 });
 
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
-
-/**
- * Normalize a port into a number, string, or false.
- */
-
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
-}
-
-/**
- * Event listener for HTTP server "error" event.
- */
-
-function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
-
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
-
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
-}
-
-/**
- * Event listener for HTTP server "listening" event.
- */
-
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
-}
+//listen on port
+webServer.listen(port, function () {
+  console.log('listening on http://localhost:' + port);
+});
