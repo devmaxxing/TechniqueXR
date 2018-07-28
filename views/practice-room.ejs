@@ -15,32 +15,46 @@
     <script src="/javascripts/easyrtc.js"></script>
     <a-scene id="game" networked-scene=<%- '"room:' + roomName + '; debug: true; adapter:easyrtc; audio:true;"'%>>
       <a-assets>
-        <img id="sky" src="http://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
-        <!-- <a-asset-item id="tt-table-model" src="/models/tt-table.gltf"></a-asset-item>
-        <a-asset-item id="tt-racket-model" src="/models/tt-racket.gltf"></a-asset-item> -->
+        <img id="groundTexture" src="images/textures/hex_grid.png">
+        <a-asset-item id="tt-table-model" src="/models/table_tennis_table.gltf"></a-asset-item>
+        <a-asset-item id="tt-net-model" src="/models/table_tennis_net.gltf"></a-asset-item>
+        <a-asset-item id="tt-racket-model" src="/models/table_tennis_racket.gltf"></a-asset-item>
         <template id="avatar-template">
           <a-sphere networked-audio-source="positional:false"></a-sphere>
        </template>
-     </a-assets>
-     <a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" camera wasd-controls look-controls>
-     </a-entity>
+      </a-assets>
+      <a-entity id="player" networked="template:#player-template;attachTemplateToLocal:false;" spawn-in-circle="radius:3" wasd-controls>
+        <a-entity camera="userHeight: 1.6" look-controls networked="template:#head-template;attachTemplateToLocal:false;">
+            <a-sphere class="head"
+              random-color
+              visible="false"
+            ></a-sphere>
+        </a-entity>
+        <a-entity id="rhand" mixin="touch"
+                  vive-controls="hand: right"
+                  oculus-touch-controls="hand: right"
+                  windows-motion-controls="hand: right">
+        </a-entity>
+        <a-entity id="lhand" mixin="touch"
+                  vive-controls="hand: left"
+                  oculus-touch-controls="hand: left"
+                  windows-motion-controls="hand: left">
+        </a-entity>
+      </a-entity>
 
-      <!-- <a-entity static-body gltf-model="#tt-table-model" position = "0 0 -2"></a-entity>
+      <a-entity static-body="shape: box" gltf-model="#tt-table-model" position = "0 0 -2"></a-entity>
+      <a-entity gltf-model="#tt-net-model" position = "0 0 -2"></a-entity>
 
-      <a-entity gltf-model="#tt-racket-model" grabbable dynamic-body="mass: 1" position="0 2 -2"></a-entity>
-      <a-entity gltf-model="#tt-racket-model" grabbable dynamic-body="mass: 1" position="0 2 -2"></a-entity>
-      <a-entity gltf-model="#tt-racket-model" grabbable dynamic-body="mass: 1" position="0 2 -2"></a-entity>
-      <a-entity gltf-model="#tt-racket-model" grabbable dynamic-body="mass: 1" position="0 2 -2"></a-entity> -->
+      <a-entity gltf-model="#tt-racket-model" grabbable dynamic-body="shape: box;mass: 1" position="0 2 -2"></a-entity>
+      <a-entity gltf-model="#tt-racket-model" grabbable dynamic-body="shape: box;mass: 1" position="0 2 -2"></a-entity>
+      <a-entity gltf-model="#tt-racket-model" grabbable dynamic-body="shape: box;mass: 1" position="0 2 -2"></a-entity>
+      <a-entity gltf-model="#tt-racket-model" grabbable dynamic-body="shape: box;mass: 1" position="0 2 -2"></a-entity>
 
-      <!-- <a-sphere dynamic-body="mass: 0.1" color="#ffffff" tt-ball scale="0.03 0.03 0.03"></a-sphere> -->
+      <a-sphere dynamic-body="mass: 0.1" color="#ffffff" tt-ball scale="0.03 0.03 0.03" grabbable position="0 1 0"></a-sphere>
 
-      <a-entity static-body 
-        geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0" material="color: #333333"></a-entity>
+      <a-plane static-body src="#groundTexture" material="roughness: 0.6;" rotation="-90 0 0" width="30" height="30" repeat="23 20"></a-plane>
 
-      <a-entity light="color: #ffffff; intensity: 0.01; type: ambient;" visible=""></a-entity>
-      <a-entity id = "sceneLight" light="color: #ffffff; intensity: 0.02" position="5 5 5"></a-entity>
-
-      <a-sky src="#sky" rotation="0 -90 0"></a-sky>
+      <a-sky></a-sky>
 
     </a-scene>
 
