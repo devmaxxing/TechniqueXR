@@ -3,7 +3,7 @@
     <!-- Stylesheets in here -->
     <link rel="stylesheet" href="/stylesheets/practice-room.css">
     <script src="/javascripts/aframe-master.js"></script>
-    <script src="/javascripts/aframe-physics-system.min.js"></script>
+    <script src="/javascripts/aframe-physics-system.js"></script>
     <script src="/javascripts/aframe-extras.min.js"></script>
     
     <script src="/javascripts/networked-aframe.min.js"></script>
@@ -13,7 +13,10 @@
   <body>
     <script src="/javascripts/socket.io.min.js"></script>
     <script src="/javascripts/easyrtc.js"></script>
-    <a-scene id="game" networked-scene=<%- '"room:' + roomName + '; debug: true; adapter:easyrtc; audio:true;"'%>>
+    <script src="/javascripts/adjust-height.js"></script>
+    <script src="/javascripts/practice-room.js"></script>
+    <a-scene id="game">
+    <!-- <a-scene id="game" networked-scene=<%- '"room:' + roomName + '; debug: true; adapter:easyrtc; audio:true;"'%>> -->
       <a-assets>
         <img id="groundTexture" src="images/textures/hex_grid.png">
         <a-asset-item id="tt-table-model" src="/models/table_tennis_table.gltf"></a-asset-item>
@@ -23,34 +26,28 @@
           <a-sphere networked-audio-source="positional:false"></a-sphere>
        </template>
       </a-assets>
-      <a-entity id="player" networked="template:#player-template;attachTemplateToLocal:false;" spawn-in-circle="radius:3" wasd-controls>
-        <a-entity camera="userHeight: 1.6" look-controls networked="template:#head-template;attachTemplateToLocal:false;">
+      <a-entity id="player" progressive-controls movement-controls networked="template:#player-template;attachTemplateToLocal:false;" spawn-in-circle="radius:3" wasd-controls>
+        <a-entity id = "player-head" camera look-controls networked="template:#head-template;attachTemplateToLocal:false;">
             <a-sphere class="head"
               random-color
               visible="false"
             ></a-sphere>
         </a-entity>
-        <a-entity id="rhand" mixin="touch"
-                  vive-controls="hand: right"
-                  oculus-touch-controls="hand: right"
-                  windows-motion-controls="hand: right">
+        <a-entity id="rhand" class="right-controller">
         </a-entity>
-        <a-entity id="lhand" mixin="touch"
-                  vive-controls="hand: left"
-                  oculus-touch-controls="hand: left"
-                  windows-motion-controls="hand: left">
+        <a-entity id="lhand" class="left-controller">
         </a-entity>
       </a-entity>
 
-      <a-entity static-body="shape: box" gltf-model="#tt-table-model" position = "0 0 -2"></a-entity>
-      <a-entity gltf-model="#tt-net-model" position = "0 0 -2"></a-entity>
+      <a-entity class="tt-table" static-body="shape: box" grabbable gltf-model="#tt-table-model" scale = "0.6 1 0.6" position = "0 0.1 -2"></a-entity>
+      <a-entity gltf-model="#tt-net-model" position = "0 0.1 -2" scale="0.6 1 1"></a-entity>
 
-      <a-entity gltf-model="#tt-racket-model" grabbable dynamic-body="shape: box;mass: 1" position="0 2 -2"></a-entity>
-      <a-entity gltf-model="#tt-racket-model" grabbable dynamic-body="shape: box;mass: 1" position="0 2 -2"></a-entity>
-      <a-entity gltf-model="#tt-racket-model" grabbable dynamic-body="shape: box;mass: 1" position="0 2 -2"></a-entity>
-      <a-entity gltf-model="#tt-racket-model" grabbable dynamic-body="shape: box;mass: 1" position="0 2 -2"></a-entity>
+      <a-entity scale = "0.75 0.75 0.75" class="tt-racket" gltf-model="#tt-racket-model" position="0.5 1.5 -2.5" grabbable dynamic-body="shape:box; mass: 2"></a-entity>
+      <a-entity scale = "0.75 0.75 0.75" class="tt-racket" gltf-model="#tt-racket-model" position="0.5 1.5 -2.5" grabbable dynamic-body="shape:box; mass: 2"></a-entity>
+      <a-entity scale = "0.75 0.75 0.75" class="tt-racket" gltf-model="#tt-racket-model" position="-0.5 1.5 -1" grabbable dynamic-body="shape:box; mass: 2"></a-entity>
+      <a-entity scale = "0.75 0.75 0.75" class="tt-racket" gltf-model="#tt-racket-model" position="-0.5 1.5 -1" grabbable dynamic-body="shape:box; mass: 2"></a-entity>
 
-      <a-sphere dynamic-body="mass: 0.1" color="#ffffff" tt-ball scale="0.03 0.03 0.03" grabbable position="0 1 0"></a-sphere>
+      <a-sphere dynamic-body="shape:sphere;" color="#ffa500" tt-ball scale="0.02 0.02 0.02" grabbable position="0 1 -2"></a-sphere>
 
       <a-plane static-body src="#groundTexture" material="roughness: 0.6;" rotation="-90 0 0" width="30" height="30" repeat="23 20"></a-plane>
 
