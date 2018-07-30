@@ -47,9 +47,9 @@
       <a-entity scale = "0.75 0.75 0.75" class="tt-racket" gltf-model="#tt-racket-model" position="-0.5 1.5 -1" grabbable dynamic-body="shape:box; mass: 2"></a-entity>
       <a-entity scale = "0.75 0.75 0.75" class="tt-racket" gltf-model="#tt-racket-model" position="-0.5 1.5 -1" grabbable dynamic-body="shape:box; mass: 2"></a-entity>
 
-      <a-sphere dynamic-body="shape:sphere;" color="#ffa500" tt-ball scale="0.02 0.02 0.02" grabbable position="0 1 -2"></a-sphere>
+      <a-sphere class="tt-ball" dynamic-body="shape:sphere;" color="#ffa500" tt-ball scale="0.02 0.02 0.02" grabbable position="0 3 -2"></a-sphere>
 
-      <a-plane static-body src="#groundTexture" material="roughness: 0.6;" rotation="-90 0 0" width="30" height="30" repeat="23 20"></a-plane>
+      <a-plane id="ground" static-body src="#groundTexture" material="roughness: 0.6;" rotation="-90 0 0" width="30" height="30" repeat="23 20"></a-plane>
 
       <a-sky></a-sky>
 
