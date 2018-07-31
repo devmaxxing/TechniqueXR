@@ -28,6 +28,7 @@ app.use('/javascripts', express.static(__dirname + '/node_modules/super-hands/di
 app.use('/javascripts', express.static(__dirname + '/node_modules/networked-aframe/dist/'));
 app.use('/javascripts', express.static(__dirname + '/node_modules/easyrtc/api/'));
 app.use('/javascripts', express.static(__dirname + '/node_modules/socket.io-client/dist/'));
+app.use('/javascripts', express.static(__dirname + '/node_modules/aframe-physics-extras/dist/'));
 
 app.use('/', index);
 app.use('/practice-room', practiceRoom);

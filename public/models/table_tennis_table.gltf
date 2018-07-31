@@ -5,7 +5,7 @@
             "componentType" : 5123, 
             "count" : 4152, 
             "max" : [
-                1938
+                1942
             ], 
             "min" : [
                 0
@@ -15,7 +15,7 @@
         {
             "bufferView" : 1, 
             "componentType" : 5126, 
-            "count" : 1939, 
+            "count" : 1943, 
             "max" : [
                 1.0149990320205688, 
                 1.0000079870224, 
@@ -31,7 +31,7 @@
         {
             "bufferView" : 2, 
             "componentType" : 5126, 
-            "count" : 1939, 
+            "count" : 1943, 
             "max" : [
                 1.0, 
                 1.0, 
@@ -102,38 +102,38 @@
         }, 
         {
             "buffer" : 0, 
-            "byteLength" : 23268, 
+            "byteLength" : 23316, 
             "byteOffset" : 8304, 
             "target" : 34962
         }, 
         {
             "buffer" : 0, 
-            "byteLength" : 23268, 
-            "byteOffset" : 31572, 
+            "byteLength" : 23316, 
+            "byteOffset" : 31620, 
             "target" : 34962
         }, 
         {
             "buffer" : 0, 
             "byteLength" : 1248, 
-            "byteOffset" : 54840, 
+            "byteOffset" : 54936, 
             "target" : 34963
         }, 
         {
             "buffer" : 0, 
             "byteLength" : 3516, 
-            "byteOffset" : 56088, 
+            "byteOffset" : 56184, 
             "target" : 34962
         }, 
         {
             "buffer" : 0, 
             "byteLength" : 3516, 
-            "byteOffset" : 59604, 
+            "byteOffset" : 59700, 
             "target" : 34962
         }
     ], 
     "buffers" : [
         {
-            "byteLength" : 63120, 
+            "byteLength" : 63216, 
             "uri" : "table_tennis_table.bin"
         }
     ], 

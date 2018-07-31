@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         const tableMaterial = new CANNON.Material();
 
         //Create ball/racket and ball/table Collision Materials and them to the world
-        const racket_ball = new CANNON.ContactMaterial(racketMaterial, ballMaterial, {friction: 0.5, restitution:0.95});
+        const racket_ball = new CANNON.ContactMaterial(racketMaterial, ballMaterial, {friction: 0.5, restitution: 0.9});
         const ball_table = new CANNON.ContactMaterial(tableMaterial, ballMaterial, {friction: 0.1, restitution: 0.9});
         world.addContactMaterial(racket_ball);
         world.addContactMaterial(ball_table);
