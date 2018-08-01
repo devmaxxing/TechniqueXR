@@ -70,10 +70,8 @@ AFRAME.registerComponent('object-hit', {
         var self = this;
         data.detail.findAnchor(x,y).then(function (anchorOffset) {
           if (anchorOffset === null){
-            alert('miss');
+            alert('Unable to find anchor. Please try again.');
           } else {
-            alert('hit');
-            
             // will set the position and orientation based on the anchorOffset attached to the entity
             this.objectToAnchor.setAttribute('xranchor', {});
             this.objectToAnchor.components.xranchor.anchorOffset = anchorOffset;
