@@ -19,6 +19,7 @@ a-scene {
 }
 
 #player-controls {
+  z-index: 100;
   padding: 15px;
 }
 

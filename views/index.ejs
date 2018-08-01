@@ -4,6 +4,7 @@
     <script src="/javascripts/aframe-master.js"></script>
     <script src="/javascripts/three.xr.js"></script>
     <script src="/javascripts/aframe-xr.js"></script>
+    <script src="/javascripts/aframe-extras.min.js"></script>
     <script src="/javascripts/animation-player.js"></script>
     <script src="/javascripts/index.js"></script>
     <script src="/javascripts/object-hit.js"></script>
@@ -40,9 +41,9 @@
             <a-asset-item id="skip-next-icon" src="/images/skip_next_icon.png"></a-asset-item>
           </a-assets>
 
-          <a-entity wasd-controls>
+          <a-entity movement-controls>
             <a-entity id="camera" camera position="0 1.6 0" look-controls>
-              <a-entity xr="ar: true; vr: false; magicWindow: false" cursor="fuse: true; fuseTimeout: 500"
+              <a-entity xr="ar: true; vr: true; magicWindow: false" cursor="fuse: true; fuseTimeout: 500"
                 position="0 0 -1"
                 geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
                 material="color: black; shader: flat">
