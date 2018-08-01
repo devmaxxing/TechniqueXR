@@ -29,6 +29,8 @@ app.use('/javascripts', express.static(__dirname + '/node_modules/networked-afra
 app.use('/javascripts', express.static(__dirname + '/node_modules/easyrtc/api/'));
 app.use('/javascripts', express.static(__dirname + '/node_modules/socket.io-client/dist/'));
 app.use('/javascripts', express.static(__dirname + '/node_modules/aframe-physics-extras/dist/'));
+app.use('/javascripts', express.static(__dirname + '/node_modules/aframe-xr/dist/'));
+app.use('/javascripts', express.static(__dirname + '/node_modules/aframe-xr/vendor/'));
 
 app.use('/', index);
 app.use('/practice-room', practiceRoom);
