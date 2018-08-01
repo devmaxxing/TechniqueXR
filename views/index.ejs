@@ -7,19 +7,71 @@
     <script src="/javascripts/animation-player.js"></script>
     <script src="/javascripts/index.js"></script>
     <script src="/javascripts/object-hit.js"></script>
+    <script src="/javascripts/look-at-object.js"></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <div class="main">
       <div class="sidebar">
-
+        <div class="sidebar-section-container">
+          <h1>Technique XR</h1>
+        </div>
+        <div>
+          <div class="sidebar-section-container">
+            <h2><a href=<%='/practice-room?isHost=true&room=' + Math.random().toString(36).substring(7)%>> Practice Room (WIP)</a></h2>
+          </div>
+          <div>
+            <div class="sidebar-category">
+              <h2>Table Tennis 🏓</h2>
+            </div>
+            <div class="sidebar-category-item sidebar-item-selected">
+              Forehand Drive
+            </div>
+          </div>
+        </div>
       </div>
       <div id="content">
-        <a-scene object-hit="objectToAnchor:#character-model" embedded>
+        <a-scene object-hit="objectToAnchor:#character-model-container" embedded>
           <a-assets>
             <a-asset-item id="character" src="/models/table_tennis_forehand.gltf"></a-asset-item>
+            <a-asset-item id="play-icon" src="/images/play_icon.png"></a-asset-item>
+            <a-asset-item id="pause-icon" src="/images/pause_icon.png"></a-asset-item>
+            <a-asset-item id="skip-previous-icon" src="/images/skip_previous_icon.png"></a-asset-item>
+            <a-asset-item id="skip-next-icon" src="/images/skip_next_icon.png"></a-asset-item>
           </a-assets>
-          <a-entity xr="ar: true; vr: true; magicWindow: true" id="character-model" position="0.5 0 -2" rotation="-90 90 0" gltf-model="#character" animation-player></a-entity>
+
+          <a-entity wasd-controls>
+            <a-entity id="camera" camera position="0 1.6 0" look-controls>
+              <a-entity xr="ar: true; vr: false; magicWindow: false" cursor="fuse: true; fuseTimeout: 500"
+                position="0 0 -1"
+                geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                material="color: black; shader: flat">
+              </a-entity>
+            </a-entity>
+            <a-entity laser-controls="hand: left"></a-entity>
+            <a-entity laser-controls="hand: right"></a-entity>
+          </a-entity>
+          
+          <a-entity xr="ar: true; vr: true; magicWindow: true" id="character-model-container" position="0.5 0 -2">
+            <a-entity id="character-model" rotation="-90 90 0" gltf-model="#character" animation-player></a-entity>
+            <a-entity xr="ar: true; vr: true; magicWindow: false" position= "0 1.6 0">
+              <a-box color="#dddddd" scale="0.1 0.1 0.1" id="play-button-xr" position="-0.3 0 1">
+                  <a-text color="#000000" position="-0.2 0 0.5" value="Play"></a-text>
+              </a-box>
+              <a-box color="#dddddd" scale="0.1 0.1 0.1" id="pause-button-xr" position="-0.15 0 1">
+                  <a-text color="#000000" position="-0.2 0 0.5" value="Pause"></a-text>
+              </a-box>
+              <a-box color="#dddddd" scale="0.1 0.1 0.1" id="skip-previous-button-xr" position="0 0 1">
+                  <a-text color="#000000" position="-0.2 0 0.5" value="Next"></a-text>
+              </a-box>
+              <a-box color="#dddddd" scale="0.1 0.1 0.1" id="skip-next-button-xr" position="0.15 0 1">
+                  <a-text color="#000000" position="-0.2 0 0.5" value="Previous"></a-text>
+              </a-box>
+              <a-box color="#dddddd" scale="0.1 0.1 0.1" id="speed-button-xr" position="0.3 0 1">
+                <a-text id="speed-button-text" color="#000000" position="-0.2 0 0.5" value="1X"></a-text>
+              </a-box>
+            </a-entity>
+          </a-entity>
         </a-scene>
         <div id="player-controls">
           <div class="controls-row">

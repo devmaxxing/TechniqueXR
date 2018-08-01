@@ -15,6 +15,7 @@ a-scene {
   display: flex;
   flex-flow: column;
   height: 100vh;
+  flex-grow: 1;
 }
 
 #player-controls {
@@ -38,4 +39,58 @@ a-scene {
 
 #speed-label {
   line-height: 25px;
+}
+
+.main {
+  display: flex;
+}
+
+.sidebar {
+  z-index: 10;
+  padding: 20px 0 20px 20px;
+  background: black;
+  color: white;
+  width: 250px;
+}
+
+.sidebar-section-container {
+  padding-right: 20px;
+  margin-bottom: 25px;
+  border-bottom: solid grey 2px;
+}
+
+.sidebar-category-item {
+  padding-left: 25px;
+  line-height: 20px;
+}
+
+.sidebar-item-selected {
+  font-weight:bold;
+  position: relative;
+}
+
+.sidebar-item-selected::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid white;
+  position: absolute;
+  right: 0;
+}
+
+@media (max-width: 800px) {
+  .sidebar {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    z-index: 100;
+    display: none;
+  }
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none; /* no underline */
 }
